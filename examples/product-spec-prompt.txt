@@ -1,0 +1,35 @@
+You are helping a product team turn a rough feature idea into an implementation-ready spec.
+
+Please be very careful and do not skip details.
+Please preserve every constraint.
+Please preserve the JSON example exactly.
+Please preserve URLs exactly.
+
+Feature:
+Build a local-first AI assistant for sensitive professional work. It should keep user memory encrypted on device, support a bring-your-own-key model provider setup, and provide a clean export workflow.
+
+Requirements:
+- Use AES-256-GCM for local vault records.
+- Keep API keys out of logs.
+- Make the first-run flow understandable to non-technical professionals.
+- Provide a demo mode with sample data.
+- Include a reviewer checklist.
+
+Example configuration:
+```json
+{
+  "vault": {
+    "encryption": "AES-256-GCM",
+    "storage": "local"
+  },
+  "ai": {
+    "providers": ["ollama", "openai", "anthropic"],
+    "default": "ollama"
+  }
+}
+```
+
+Reference:
+https://2026-04-21-that-s-a-full-green-run.vercel.app
+
+Please make the answer concise, implementation-focused, and suitable for an engineer.
