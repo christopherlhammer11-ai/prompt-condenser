@@ -1,106 +1,62 @@
 # Prompt Condenser
 
-CLI and TypeScript library for compressing LLM prompts and reducing token usage
-without losing intent, code blocks, JSON, or URLs.
+**Prompt compression for lower-cost LLM workflows.** Prompt Condenser shrinks large prompts while preserving intent, URLs, code blocks, JSON, and the parts a model actually needs.
 
-<!-- badges -->
+Demo: **Watch the demo:** [Prompt Condenser](https://christopherhammer.dev/assets/videos/narrated/project-demos/prompt-condenser-narrated.mp4)
 
-## What It Does
+## Who Uses It
 
-Prompt Condenser (`prompt-condenser`) shrinks long prompts to reduce LLM token
-costs while preserving critical instructions. Three compression levels, smart
-deduplication, token estimates, and code-block protection make it useful for
-developers, prompt-heavy teams, and AI workflow builders.
+- Startups spending heavily on LLM context
+- Agent builders passing scraped pages into models
+- Teams hitting context limits
+- Developers who want cleaner, cheaper prompts without breaking code snippets or links
 
-## Features
+## Core Features
 
-- **3 Compression Levels**: safe (10%), moderate (30%), aggressive (50%) savings
-- **Code Protection**: Never modifies code blocks, URLs, or JSON
-- **Deduplication**: Removes repeated instructions and examples
-- **Token Estimation**: Predicts token savings before and after
-- **Format Preservation**: Maintains structure for readability
-- **Safe Defaults**: Guard against over-aggressive compression
+- Safe, moderate, and aggressive compression levels
+- URL, JSON, and code-block protection
+- Repeated-instruction cleanup
+- Token estimate reporting
+- CLI and TypeScript library usage
+- Useful preprocessing layer for agents and RAG workflows
 
-## Quick Start
+## Why It Matters
 
-Until the npm package is published, install from the GitHub repo or a local
-tarball. The `prompt-condenser` npm package name is currently available.
-
-```bash
-npm install -g github:christopherlhammer11-ai/prompt-condenser
-prompt-condenser input.txt --level moderate
-```
-
-## Usage
-
-```bash
-# Safe compression (10% reduction)
-prompt-condenser prompt.txt --level safe
-
-# Moderate compression (30% reduction)
-prompt-condenser prompt.txt --level moderate
-
-# Aggressive compression (50% reduction)
-prompt-condenser prompt.txt --level aggressive
-
-# Estimate tokens only
-prompt-condenser prompt.txt --estimate
-
-# Output to file
-prompt-condenser prompt.txt --output compressed.txt
-```
+LLM apps often waste money by sending bloated context over and over. Condenser reduces token load while keeping task intent intact, which can lower cost and reduce context-limit failures.
 
 ## Example
 
-This repo includes a sample product-spec prompt with JSON and a URL so reviewers
-can verify that protected content survives compression.
-
 ```bash
-npm run build
-node dist/cli.js examples/product-spec-prompt.txt --level moderate
+prompt-condenser prompt.txt --level moderate --output compressed.txt
+prompt-condenser prompt.txt --estimate
 ```
 
-Expected behavior:
+Programmatic usage:
 
-- repeated instructions are tightened
-- code fences and JSON remain intact
-- URLs remain unchanged
-- the output includes before/after token estimates
+```ts
+import { condensePrompt } from 'prompt-condenser';
 
-## Tech Stack
+const result = condensePrompt(rawPrompt, { level: 'moderate' });
+console.log(result.estimatedSavings);
+```
 
-- Commander.js (CLI framework)
-- Tokenization algorithms
-- Pattern matching (deduplication)
-- Jest test suite
+## Quick Start
 
-## Product Status
+```bash
+npm install
+npm run build
+npm test
+```
 
-Verified on April 22, 2026:
+## Portfolio Context
 
-- `npm test` passes: 26 tests
-- `npm run build` passes
-- `npm pack --dry-run` produces a clean 11.5 kB package
-- `node dist/cli.js --help` works
+Prompt Condenser is part of the agent reliability/cost layer alongside Tool Use Guardian and Real-Time Verifier. Together they make AI workflows cheaper, cleaner, and less fragile.
 
-## Commercial Path
+---
 
-- Free CLI for developer adoption
-- Paid batch processor for teams with prompt libraries
-- Paid API/reporting layer for tracking prompt cost reduction over time
+Built by **Christopher L. Hammer** - self-taught AI/product builder shipping local-first tools, demos, and real product surfaces.
 
-## Release Checklist
+- Portfolio: [christopherhammer.dev](https://christopherhammer.dev)
+- Proof demos: [https://christopherhammer.dev#proof](https://christopherhammer.dev#proof)
+- GitHub: [christopherlhammer11-ai](https://github.com/christopherlhammer11-ai)
 
-- [x] Build passes
-- [x] Tests pass
-- [x] CLI help works
-- [x] Example prompt included
-- [x] Package dry-run verified
-- [ ] Publish to npm
-- [ ] Add hosted before/after demo
-
-## Author
-
-Christopher L. Hammer  
-GitHub: [christopherlhammer11-ai](https://github.com/christopherlhammer11-ai)  
-Portfolio: [AI Engineering Portfolio](https://2026-04-21-that-s-a-full-green-run.vercel.app)
