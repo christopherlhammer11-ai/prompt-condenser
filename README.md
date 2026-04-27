@@ -2,7 +2,7 @@
 
 **Prompt compression for lower-cost LLM workflows.** Prompt Condenser shrinks large prompts while preserving intent, URLs, code blocks, JSON, and the parts a model actually needs.
 
-Demo: **Watch the demo:** [Prompt Condenser](https://christopherhammer.dev/assets/videos/narrated/project-demos/prompt-condenser-narrated.mp4)
+**Demo:** [Prompt Condenser](https://christopherhammer.dev/assets/videos/narrated/project-demos/prompt-condenser-narrated.mp4)
 
 ## Who Uses It
 
